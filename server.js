@@ -24,9 +24,6 @@ server.listen(3000, ()=>{
     console.log('server started at http://localhost:3000/data')
 })
 
-// rest api
-const RestMenuItems = require('./rest-api/menuitems.js')
-const RestAuthentication = require('./rest-api/authentication.js')
 
 // data
 const mongoose = require('mongoose');
@@ -49,11 +46,22 @@ const Customer = mongoose.model('Customer', new mongoose.Schema({
     password: String
 }))
 
+
+// rest api
+const RestCustomer = require('./rest-api/customer.js')
+const RestAuthentication = require('./rest-api/authentication.js')
+const RestMenu = require('./rest-api/menu.js')
+const RestMenuItems = require('./rest-api/menuitems.js')
+
+
 async function start(){
     await mongoose.connect('mongodb+srv://foodcourt-mongodb:De9kXmzVoNuob9ZZ@cluster0.gfzs4.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
     // add REST api
+    RestCustomer(server, Customer)   
     RestAuthentication(server, Customer)
+    RestMenu(server, Menu)
     RestMenuItems(server, MenuItem)
+    
 }
 start()
 

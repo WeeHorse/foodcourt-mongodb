@@ -1,4 +1,4 @@
-// whatever
+// Authentication
 
 module.exports = function(server, Customer){
 

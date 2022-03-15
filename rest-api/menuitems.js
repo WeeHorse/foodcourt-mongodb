@@ -1,8 +1,6 @@
 
 module.exports = function(server, MenuItem){
 
-    // menuitems
-
     // GET (read, select) all
     server.get('/data/menu-items', async (request, response) => {
         let result = await MenuItem.find()
